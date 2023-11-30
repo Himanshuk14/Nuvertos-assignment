@@ -1,0 +1,8 @@
+<div class="card" [routerLink]="['/compound', compound.id]">
+  <img src="{{ compound.compoundImage }}" alt="{{ compound.compoundImage }}" />
+  <h2>{{ compound.compoundName }}</h2>
+  <div class="card-footer">
+    <button class="icon" (click)="onDelete(compound); $event.stopPropagation()">Delete</button>
+    <button class="icon" [routerLink]="['/compound/edit', compound.id]">Edit</button>
+  </div>
+</div>

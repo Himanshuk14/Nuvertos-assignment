@@ -1,0 +1,12 @@
+<div class="description-container">
+  <app-header></app-header>
+  <div class="compound-container">
+    <img src="{{ compound.compoundImage }}" alt="{{ compound.compoundImage }}" />
+    <div class="compound-details">
+      <h2>{{ compound.compoundName }}</h2>
+      <p>{{ compound.compoundDescription }}</p>
+      <button class="description-btn" [routerLink]="['/']">Go Back</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="dashboard-container">
+  <app-header></app-header>
+  <section>
+    <app-compound-list
+      *ngFor="let compound of compounds"
+      [compound]="compound"
+      (onDeleteCompound)="deleteCompound(compound)"
+    ></app-compound-list>
+  </section>
+  <div class="dashboard-footer ">
+    <div class="pages">
+      <button
+        *ngIf="page !== 1"
+        [routerLink]="['/compounds']"
+        [queryParams]="{ pg: page - 1 }"
+      >
+        Previous
+      </button>
+      <span class="button-text">{{ page }} / {{ totalPages }}</span>
+      <button
+        *ngIf="page !== totalPages"
+        [routerLink]="['/compounds']"
+        [queryParams]="{ pg: page + 1 }"
+      >
+        Next
+      </button>
+    </div>
+    <div class="add-btn-container" ><button class="dashboard-add-button" [routerLink]="['/compound/add']">Add Compound</button></div>
+  </div>
+</div>

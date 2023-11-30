@@ -1,0 +1,37 @@
+<div class="add-form-container">
+  <app-header></app-header>
+  <div class="form-container">
+    <form class="form" (ngSubmit)="onSubmit()">
+      <h3>{{operation}} Entry</h3>
+      <div class="form-control">
+        <input
+          type="text"
+          name="compound-name"
+          id="compound-name"
+          [(ngModel)]="name"
+          placeholder="Name"
+        />
+      </div>
+      <div class="form-control">
+        <textarea
+          name="compound-description"
+          id="compound-description"
+          [(ngModel)]="description"
+          placeholder="Description"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="form-control">
+        <input
+          type="text"
+          name="image-url"
+          id="image-url"
+          placeholder="URL"
+          [(ngModel)]="image"
+        />
+      </div>
+      <input type="submit" value="{{ operation }}" class="btn btn-primary" />
+      <button class="btn btn-secondary" [routerLink]="['/compounds']">Go Back</button>
+    </form>
+  </div>
+</div>

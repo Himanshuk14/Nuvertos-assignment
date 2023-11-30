@@ -1,0 +1,12 @@
+.error-page {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}

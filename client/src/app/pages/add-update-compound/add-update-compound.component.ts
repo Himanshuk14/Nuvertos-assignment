@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CompoundService } from '../../services/compound.service';
+
+@Component({
+  selector: 'app-add-update-compound',
+  templateUrl: './add-update-compound.component.html',
+  styleUrls: ['./add-update-compound.component.css'],
+})
+export class AddUpdateCompoundComponent implements OnInit {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  operation: string = 'Add';
+
+  constructor(
+    private route: ActivatedRoute,
+    private compoundService: CompoundService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.compoundService.getCompoundById(this.id).subscribe(
+        (compound) => {
+          this.name = compound.compoundName;
+          this.description = compound.compoundDescription;
+          this.image = compound.compoundImage;
+          this.operation = 'Update';
+        },
+        (error) => this.router.navigate(['/404']),
+      );
+    }
+  }
+
+  onSubmit() {
+    if (!this.name || !this.description || !this.image) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    if (this.operation === 'Add') {
+      const newCompound = {
+        compoundName: this.name,
+        compoundDescription: this.description,
+        compoundImage: this.image,
+      };
+      this.compoundService.addCompound(newCompound).subscribe(
+        () => {
+          alert('Compound added!');
+        },
+        (error) => alert(error.message),
+      );
+
+      this.name = '';
+      this.description = '';
+      this.image = '';
+    } else {
+      const updatedCompound = {
+        id: Number(this.id),
+        compoundName: this.name,
+        compoundDescription: this.description,
+        compoundImage: this.image,
+      };
+      this.compoundService.updateCompound(updatedCompound).subscribe(
+        () => {
+          alert('Compound updated!');
+        },
+        (error) => alert(error.message),
+      );
+    }
+  }
+}
